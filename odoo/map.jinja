@@ -1,0 +1,77 @@
+
+{%- set source_engine = salt['pillar.get']('odoo:server:source:engine') %}
+
+{%- load_yaml as base_defaults %}
+{%- if source_engine == 'git' %}
+Debian:
+  pkgs:
+  - adduser
+  - node-less
+  - node-clean-css
+  - postgresql-client
+  - python
+  - python-dateutil
+  - python-decorator
+  - python-docutils
+  - python-feedparser
+  - python-imaging
+  - python-jinja2
+  - python-ldap
+  - python-libxslt1
+  - python-lxml
+  - python-mako
+  - python-mock
+  - python-openid
+  - python-passlib
+  - python-psutil
+  - python-psycopg2
+  - python-pybabel
+  - python-pychart
+  - python-pydot
+  - python-pyparsing
+  - python-pypdf
+  - python-reportlab
+  - python-requests
+  - python-suds
+  - python-tz
+  - python-vatnumber
+  - python-vobject
+  - python-werkzeug
+  - python-xlwt
+  - python-yaml
+  - libjpeg-dev
+  # less
+  - node-less
+  # optional
+  - antiword
+  - graphviz
+  - ghostscript
+  - postgresql
+  - python-gevent
+  - poppler-utils
+  - libsasl2-dev
+  - libldap2-dev
+  - libssl-dev
+  - libxml2-dev
+  - libxslt1-dev
+  dir:
+    base: /srv/odoo/venv
+    home: /var/lib/odoo
+    workspace: /srv/odoo/workspace
+RedHat:
+  pkgs:
+  - python-psycopg2
+  dir:
+    base: /srv/odoo/venv
+    home: /var/lib/odoo
+    workspace: /srv/odoo/workspace
+{%- else %}
+Debian:
+  pkgs:
+  - odoo
+  dir:
+    base: /usr/lib/odoo
+{%- endif %}
+{%- endload %}
+
+{%- set server = salt['grains.filter_by'](base_defaults, merge=salt['pillar.get']('odoo:server')) %}
