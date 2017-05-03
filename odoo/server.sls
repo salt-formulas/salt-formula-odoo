@@ -8,7 +8,7 @@ odoo_packages:
 {{ server.source.address }}:
   git.latest:
   - target: /opt/odoo/app
-  - branch: {{ server.source.get("branch", "9.0") }}
+  - branch: {{ server.source.get("branch", "10.0") }}
   - depth: 1
   - fetch_tags: False
   - require:
