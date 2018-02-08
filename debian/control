@@ -10,6 +10,6 @@ Vcs-Git: https://github.com/tcpcloud/salt-formula-odoo.git
 
 Package: salt-formula-odoo
 Architecture: all
-Depends: ${misc:Depends}, salt-master, reclass
+Depends: ${misc:Depends}
 Description: odoo salt formula
  Install and configure odoo system.
