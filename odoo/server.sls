@@ -70,6 +70,7 @@ chown_odoo:
 odoo-service:
   service.enabled:
   - name: odoo-server
+  - enable: true
   - require:
     - file: /etc/systemd/system/odoo-server.service
 
@@ -81,9 +82,10 @@ odoo-service:
   - mode: 755
   - template: jinja
 
-odoo-server:
+odoo-service:
   service.enabled:
   - name: odoo-server
+  - enable: true
   - require:
     - file: /etc/init.d/odoo-server
 
