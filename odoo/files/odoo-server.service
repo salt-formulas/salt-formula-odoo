@@ -1,13 +1,13 @@
 [Unit]
 Description=Odoo
-After=odoo.target
+After=network.target
 
 [Service]
 User=odoo
 Group=odoo
 Type=simple
 WorkingDirectory=/opt/odoo
-ExecStart=/usr/bin/python /opt/odoo/ocb/odoo.py -c /opt/odoo/.openerp_serverrc 
+ExecStart=/opt/odoo/bin/python  /opt/odoo/app/odoo-bin --config=/etc/odoo-server.conf --addons-path=/opt/odoo/app/addons/
 Restart=always
 RestartSec=10
 

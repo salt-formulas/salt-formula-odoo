@@ -61,15 +61,15 @@ chown_odoo:
 
 {%- if grains.get('init', None) == 'systemd' %}
 
-/etc/systemd/system/odoo.service:
+/etc/systemd/system/odoo-server.service:
   file.managed:
-  - source: salt://odoo/files/odoo.service
+  - source: salt://odoo/files/odoo-server.service
   - mode: 755
   - template: jinja
 
 odoo-service:
   service.enabled:
-  - name: odoo
+  - name: odoo-server
   - require:
     - file: /etc/systemd/system/odoo.service
 
