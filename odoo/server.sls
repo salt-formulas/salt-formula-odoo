@@ -53,20 +53,40 @@ odoo_directories:
   - mode: 640
   - template: jinja
 
-/etc/init.d/odoo-server:
-  file.managed:
-  - source: salt://odoo/files/init
-  - mode: 755
-  - template: jinja
-
 chown_odoo:
   cmd.run:
   - name: "chown odoo: /opt/odoo/ -R"
   - require:
     - file: /opt/odoo
 
+{%- if grains.get('init', None) == 'systemd' %}
+
+/etc/systemd/system/odoo.service:
+  file.managed:
+  - source: salt://odoo/files/odoo.service
+  - mode: 755
+  - template: jinja
+
+odoo-service:
+  service.enabled:
+  - name: odoo
+  - require:
+    - file: /etc/systemd/system/odoo.service
+
+{%- else %}
+
+/etc/init.d/odoo-server:
+  file.managed:
+  - source: salt://odoo/files/init
+  - mode: 755
+  - template: jinja
+
 odoo-server:
   service.enabled:
   - name: odoo-server
+  - require:
+    - file: /etc/init.d/odoo-server
+
+{%- endif %}
 
 {%- endif %}

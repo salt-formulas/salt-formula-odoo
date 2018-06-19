@@ -1,0 +1,15 @@
+[Unit]
+Description=Odoo
+After=odoo.target
+
+[Service]
+User=odoo
+Group=odoo
+Type=simple
+WorkingDirectory=/opt/odoo
+ExecStart=/usr/bin/python /opt/odoo/ocb/odoo.py -c /opt/odoo/.openerp_serverrc 
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
