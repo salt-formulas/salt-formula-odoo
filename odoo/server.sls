@@ -71,7 +71,7 @@ odoo-service:
   service.enabled:
   - name: odoo-server
   - require:
-    - file: /etc/systemd/system/odoo.service
+    - file: /etc/systemd/system/odoo-server.service
 
 {%- else %}
 
